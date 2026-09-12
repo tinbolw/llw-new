@@ -15,3 +15,21 @@ export async function getGuilds(accessToken: string): Promise<({ id: string } & 
 
   return await response.json();
 }
+
+/**
+ * Returns the user of the access token.
+ * @param accessToken
+ * @returns
+ */
+export async function getUser(accessToken: string) {
+  const endpoint = "https://discord.com/api/v10/users/@me";
+  const response = await fetch(endpoint, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) return null;
+
+  return await response.json();
+}
